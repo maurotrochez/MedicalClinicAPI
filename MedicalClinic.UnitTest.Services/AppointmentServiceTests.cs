@@ -84,7 +84,7 @@ namespace MedicalClinic.UnitTest.Services
             //Arrrange
             var mockRepo = new Mock<IAppointmentRepository>();
             mockRepo.Setup(repo => repo.IsCancellable(It.IsAny<long>())).Returns(true);
-            mockRepo.Setup(repo => repo.GetById(It.IsAny<int>())).Returns(new Appointment { });
+            mockRepo.Setup(repo => repo.GetById(It.IsAny<long>())).Returns(new Appointment { });
 
             var mockMapper = new Mock<IMapper>();
 

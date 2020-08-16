@@ -11,13 +11,13 @@ namespace MedicalClinic.DataAccess
     {
         IQueryable<T> GetAll();
         IQueryable<T> GetAllIncluding(params Expression<Func<T, object>>[] includeProperties);
-        T GetById(int id);
-        Task<T> GetByIdAsync(int id);
+        T GetById(long id);
+        Task<T> GetByIdAsync(long id);
         void Add(T entity);
         void AddRange(T[] entities);
         void Update(T entity);
         void Delete(T entity);
-        void Delete(int id);
+        void Delete(long id);
         bool Save();
         Task<bool> SaveAsync();
 

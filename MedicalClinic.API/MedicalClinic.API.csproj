@@ -15,9 +15,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MedicalClinic.Business.Services\MedicalClinic.Business.Services.csproj" />
     <ProjectReference Include="..\MedicalClinic.DataAccess\MedicalClinic.DataAccess.csproj" />
   </ItemGroup>
 

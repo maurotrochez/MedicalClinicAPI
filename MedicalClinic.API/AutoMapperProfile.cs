@@ -10,6 +10,12 @@ namespace MedicalClinic.API
         {
             CreateMap<Appointment, AppointmentDTO>();
             CreateMap<AppointmentDTO, Appointment>();
+
+            CreateMap<Patient, PatientDTO>();
+            CreateMap<PatientDTO, Patient>();
+
+            CreateMap<AppointmentType, AppointmentTypeDTO>();
+            CreateMap<AppointmentTypeDTO, AppointmentType>();
         }
     }
 }

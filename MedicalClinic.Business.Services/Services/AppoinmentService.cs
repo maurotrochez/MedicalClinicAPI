@@ -4,6 +4,8 @@ using MedicalClinic.DataAccess.Interfaces;
 using MedicalClinic.Models.DTOs;
 using MedicalClinic.Models.Entities;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace MedicalClinic.Business.Services.Services
@@ -55,6 +57,21 @@ namespace MedicalClinic.Business.Services.Services
                 _appoinmentRepository.Update(appointment);
                 await _appoinmentRepository.SaveAsync();
                 return true;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
+        public async Task<List<AppointmentDTO>> GetAll()
+        {
+            try
+            {
+                var appointments = (await _appoinmentRepository.GetAllAvailable()).Select(x=> _mapper.Map<Appointment, AppointmentDTO>(x)).ToList();
+                return appointments;
+                
             }
             catch (Exception ex)
             {

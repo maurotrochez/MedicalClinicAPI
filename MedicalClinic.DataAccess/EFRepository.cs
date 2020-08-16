@@ -33,7 +33,7 @@ namespace MedicalClinic.DataAccess
             }
             return query;
         }
-        public virtual T GetById(int id)
+        public virtual T GetById(long id)
         {
             return DbSet.Find(id);
         }
@@ -77,7 +77,7 @@ namespace MedicalClinic.DataAccess
                 DbSet.Remove(entity);
             }
         }
-        public virtual void Delete(int id)
+        public virtual void Delete(long id)
         {
             var entity = GetById(id);
             if (entity == null) return; // not found; assume already deleted.
@@ -92,7 +92,7 @@ namespace MedicalClinic.DataAccess
             return (await DbContext.SaveChangesAsync()) > 0;
         }
 
-        public Task<T> GetByIdAsync(int id)
+        public Task<T> GetByIdAsync(long id)
         {
             return DbSet.FindAsync(id);
         }

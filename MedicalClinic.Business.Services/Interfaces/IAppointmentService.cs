@@ -10,6 +10,6 @@ namespace MedicalClinic.Business.Services.Interfaces
     {
         Task<AppointmentDTO> Add(AppointmentDTO appointmentDTO);
         Task<bool> CancelAppoiment(int id);
-
+        Task<List<AppointmentDTO>> GetAll();
     }
 }
