@@ -1,4 +1,5 @@
 ﻿using JetBrains.Annotations;
+using MedicalClinic.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,5 +12,10 @@ namespace MedicalClinic.DataAccess
         public MedicalClinicDBContext(DbContextOptions options) : base(options)
         {
         }
+
+        public DbSet<AppointmentType> AppointmentTypes { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+
     }
 }
