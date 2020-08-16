@@ -1,4 +1,6 @@
-﻿using System;
+﻿
+using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,6 +31,8 @@ namespace MedicalClinic.API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddDbContext<MedicalClinicDBContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:MedicalClinicDB"]));
+            services.AddAutoMapper(typeof(Startup));
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +50,10 @@ namespace MedicalClinic.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            var config = new MapperConfiguration(cfg => {
+                cfg.AddProfile<AutoMapperProfile>();
+            });
         }
     }
 }

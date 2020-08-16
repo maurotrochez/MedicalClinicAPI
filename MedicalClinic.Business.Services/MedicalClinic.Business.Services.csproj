@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MedicalClinic.DataAccess\MedicalClinic.DataAccess.csproj" />
+    <ProjectReference Include="..\MedicalClinic.Models\MedicalClinic.Models.csproj" />
+  </ItemGroup>
+
 </Project>
