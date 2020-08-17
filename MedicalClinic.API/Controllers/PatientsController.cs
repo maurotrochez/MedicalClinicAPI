@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalClinic.API.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("api/patients")]
     [ApiController]
     public class PatientsController : ApiControllerBase

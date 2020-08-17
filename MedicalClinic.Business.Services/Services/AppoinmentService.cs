@@ -65,6 +65,21 @@ namespace MedicalClinic.Business.Services.Services
             }
         }
 
+        public async Task Delete(int id)
+        {
+            try
+            {
+                var appointment = await _appoinmentRepository.GetByIdAsync(id);
+                _appoinmentRepository.Delete(appointment);
+                await _appoinmentRepository.SaveAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public async Task<List<AppointmentDTO>> GetAll()
         {
             try

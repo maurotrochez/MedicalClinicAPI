@@ -65,6 +65,21 @@ namespace MedicalClinic.API.Controllers
             }
 
         }
+
+        [HttpDelete("{id}", Name = "DeleteAppointment")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _appointmentService.Delete(id);
+                return HandleSuccessResponse(true);
+            }
+            catch (Exception ex)
+            {
+                return HandleErrorResponse(ex);
+            }
+
+        }
     }
 
     
