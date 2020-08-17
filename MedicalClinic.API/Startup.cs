@@ -64,8 +64,12 @@ namespace MedicalClinic.API
             });
 
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
+            services.AddScoped<IAppointmentTypeRepository, AppointmentTypeRepository>();
+            services.AddScoped<IPatientRepository, PatientRepository>();
 
             services.AddScoped<IAppointmentService, AppoinmentService>();
+            services.AddScoped<IAppointmentTypeService, AppointmentTypeService>();
+            services.AddScoped<IPatientService, PatientService>();
             services.AddScoped<IAuthService, AuthService>();
 
         }

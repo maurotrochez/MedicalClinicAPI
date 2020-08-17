@@ -39,6 +39,7 @@ namespace MedicalClinic.Business.Services.Services
                 {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim("username", user.UserName),
                 };
 
                     foreach (var userRole in userRoles)
@@ -59,7 +60,7 @@ namespace MedicalClinic.Business.Services.Services
                     return new LoginResponseDTO
                     {
                         Token = new JwtSecurityTokenHandler().WriteToken(token),
-                        Expiration = token.ValidTo
+                        Expiration = token.ValidTo,
                     };
                 }
                 throw new Exception("Invalid username or password");
