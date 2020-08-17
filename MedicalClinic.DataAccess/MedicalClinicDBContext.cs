@@ -1,6 +1,8 @@
 ﻿using MedicalClinic.Models.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace MedicalClinic.DataAccess
 {
@@ -68,6 +70,36 @@ namespace MedicalClinic.DataAccess
                 PatientId = 2,
             }
             );
+
+            //Seeding user and role
+            const string ADMIN_ID = "a18be9c0-aa65-4af8-bd17-00bd9344e575";
+            const string ROLE_ID = ADMIN_ID;
+
+            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
+            {
+                Id = ROLE_ID,
+                Name = "admin",
+                NormalizedName = "admin"
+            });
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+            modelBuilder.Entity<ApplicationUser>().HasData(new ApplicationUser
+            {
+                Id = ADMIN_ID,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "admin@admin.com",
+                NormalizedEmail = "ADMIN@ADMIN.COM",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "admin"),
+                SecurityStamp = string.Empty
+            });
+
+            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
+            {
+                RoleId = ROLE_ID,
+                UserId = ADMIN_ID
+            });
         }
 
     }
