@@ -1,9 +1,10 @@
 ﻿using MedicalClinic.Models.Entities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedicalClinic.DataAccess
 {
-    public class MedicalClinicDBContext : DbContext
+    public class MedicalClinicDBContext : IdentityDbContext<ApplicationUser>
     {
         public MedicalClinicDBContext(DbContextOptions options) : base(options)
         {
@@ -15,6 +16,7 @@ namespace MedicalClinic.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<AppointmentType>().HasData(new AppointmentType
             {
                 Id = 1,

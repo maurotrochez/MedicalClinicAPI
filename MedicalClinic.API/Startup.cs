@@ -14,6 +14,11 @@ using MedicalClinic.Business.Services.Interfaces;
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
+using MedicalClinic.Models.Entities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace MedicalClinic.API
 {
@@ -33,6 +38,30 @@ namespace MedicalClinic.API
             services.AddDbContext<MedicalClinicDBContext>(opts => opts.UseSqlServer(Configuration["ConnectionString:MedicalClinicDB"]));
             services.AddAutoMapper(typeof(Startup));
             services.AddSwaggerGen();
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<MedicalClinicDBContext>()
+                .AddDefaultTokenProviders();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidAudience = Configuration["JWT:ValidAudience"],
+                    ValidIssuer = Configuration["JWT:ValidIssuer"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JWT:Secret"]))
+                };
+            });
 
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
@@ -58,6 +87,9 @@ namespace MedicalClinic.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseAuthentication();
+
             // Use Cors Middleware
             app.UseCors(builder => builder.AllowAnyOrigin().AllowCredentials().AllowAnyHeader().AllowAnyMethod());
 
@@ -81,6 +113,7 @@ namespace MedicalClinic.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            
 
             var config = new MapperConfiguration(cfg =>
             {

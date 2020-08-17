@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using MedicalClinic.Business.Services.Interfaces;
 using MedicalClinic.Models.DTOs;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicalClinic.API.Controllers
 {
+    [Authorize]
     [Route("api/appointments")]
     [ApiController]
     public class AppointmentsController : ApiControllerBase

@@ -25,7 +25,7 @@ namespace MedicalClinic.DataAccess.Repositories
         public bool HasAppointment(long patientId, DateTime date)
         {
             return GetAll()
-                .Any(x => x.PatientId == patientId && x.Date.Date == date.Date);
+                .Any(x => x.PatientId == patientId && x.Date.Date == date.Date && !x.IsCancelled);
         }
 
         public bool IsCancellable(long id)
